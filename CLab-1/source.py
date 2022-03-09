@@ -1,3 +1,4 @@
+from curses import A_LOW
 import numpy as np
 
 ########################################################
@@ -20,6 +21,11 @@ def low_rank_approx(A, k):
          up to rank k
     '''
     #TODO: Fill your work here
+    u,s,v = np.linalg.svd(A)
+    A_low = np.zeros((u.shape[0],v.shape[0]))
+    for i in range(r):
+        A_low += s[i]*np.outer(u.T[i],v[i])
+    return A_low 
 
 def constrained_LLS(A, B):
     '''
